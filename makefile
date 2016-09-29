@@ -12,7 +12,7 @@
 
 # use absolute path to avoid problems.
 
-PATH_TO_LIBFT=/tmp/libft-corr
+PATH_TO_LIBFT=/nfs/2016/p/ppatil/Documents/Rubbish/libft_working
 MOULITEST_DIR=./moulitest
 ALEVIER_DIR=./alevier
 QUENTIN_DIR=./quentin
@@ -56,20 +56,20 @@ moulitest_bonus : moulitest_config $(LIB_NAME)
 moulitest_config :
 	@echo "LIBFT_PATH = $(PATH_TO_LIBFT)" > moulitest/config.ini
 
-alevier_unit_test : $(LIB_NAME) alevier_config
-	$(MAKE) -C $(ALEVIER_DIR) f
+alevier_unit_test : $(LIB_NAME) #alevier_config
+	$(MAKE) -C $(ALEVIER_DIR) f LIBFTDIR=$(PATH_TO_LIBFT)
 
 alevier_config :
 	LIBFTDIR=$(PATH_TO_LIBFT)
 	export LIBFTDIR
 
 quentin_test : $(LIB_NAME)
-	$(CC) $(QUENTIN_DIR)/test_quentin.c -o $(QUENTIN_DIR)qtest -L$(PATH_TO_LIBFT) -lft -I$(PATH_TO_LIBFT)
-	./$(QUENTIN_DIR)/qtest
+	$(CC) $(QUENTIN_DIR)/test_quentin.c -o qtest -L$(PATH_TO_LIBFT) -lft -I$(PATH_TO_LIBFT)
+	./qtest
 
 yachaka_test : $(LIB_NAME)
-	$(CC) $(YACHAKA_DIR)/test_yachaka.c -o $(YACHAKA_DIR)ytest -L$(PATH_TO_LIBFT) -lft -I$(PATH_TO_LIBFT)
-	./$(YACHAKA_DIR)/ytest
+	$(CC) $(YACHAKA_DIR)/test_yachaka.c -o ytest -L$(PATH_TO_LIBFT) -lft -I$(PATH_TO_LIBFT)
+	./ytest
 
 $(LIB_NAME) :
 	$(MAKE) -C $(PATH_TO_LIBFT) all
