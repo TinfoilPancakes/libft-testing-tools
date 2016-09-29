@@ -54,7 +54,7 @@ moulitest_bonus : moulitest_config $(LIB_NAME)
 	$(MAKE) -C $(MOULITEST_DIR) libft_bonus
 
 moulitest_config :
-	@echo "LIBFT_PATH = $(PATH_TO_LIBFT)" > moulitest/config.ini
+	@echo "LIBFT_PATH = $(PATH_TO_LIBFT)" > $(MOULITEST_DIR)/config.ini
 
 alevier_unit_test : $(LIB_NAME) #alevier_config
 	$(MAKE) -C $(ALEVIER_DIR) f LIBFTDIR=$(PATH_TO_LIBFT) #They say this is bad practice but meh. I'm lazy.
