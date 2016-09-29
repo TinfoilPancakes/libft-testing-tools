@@ -13,10 +13,10 @@
 # use absolute path to avoid problems.
 
 PATH_TO_LIBFT=/nfs/2016/p/ppatil/Documents/Rubbish/libft_working
-MOULITEST_DIR=./moulitest
-ALEVIER_DIR=./alevier
-QUENTIN_DIR=./quentin
-YACHAKA_DIR=./yachaka
+MOULITEST_DIR=./moulitest_files
+ALEVIER_DIR=./alevier_files
+QUENTIN_DIR=./quentin_files
+YACHAKA_DIR=./yachaka_files
 LIB_NAME=libft.a
 
 CC = gcc -Wall -Werror -Wextra
@@ -57,7 +57,7 @@ moulitest_config :
 	@echo "LIBFT_PATH = $(PATH_TO_LIBFT)" > moulitest/config.ini
 
 alevier_unit_test : $(LIB_NAME) #alevier_config
-	$(MAKE) -C $(ALEVIER_DIR) f LIBFTDIR=$(PATH_TO_LIBFT)
+	$(MAKE) -C $(ALEVIER_DIR) f LIBFTDIR=$(PATH_TO_LIBFT) #They say this is bad practice but meh. I'm lazy.
 
 alevier_config :
 	LIBFTDIR=$(PATH_TO_LIBFT)
