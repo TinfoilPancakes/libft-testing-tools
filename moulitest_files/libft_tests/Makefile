@@ -53,7 +53,13 @@ TESTS_PATH = tests
 CC_LIBFT_LIB_DEFAULT = -L $(LIBFT_PATH) -lft
 CC_FRAMEWORK_LIB = -L$(FRAMEWORK_PATH) -lmt_framework
 CC_INCLUDES = -I . -I $(FRAMEWORK_PATH)/includes -I $(RENDU_PATH) -I $(RENDU_PATH)/includes -I $(RENDU_PATH)/includes/builtin -I $(RENDU_PATH)/libs/libtowel/includes -I $(RENDU_PATH)/libft/includes -I $(RENDU_PATH)/srcs/libft/includes
-TEST_FILES = $(shell find tests -name "*.spec.c" -type f -follow -print | grep $(PATTERN) | grep $(POST_PATTERN))
+#edited- SUCK IT INSANE MAKEFILE!
+AVAILABLE_FILES = $(shell find $(RENDU_PATH) -name "ft_*.c" -type f -follow -print | cut -f 1 -d '.' | sed -E "s/.+\///" | sed -E "s/(.+)/$(TESTS_PATH)\/\*\1\.spec\.c /")
+
+#TEST_FILES = $(shell find tests -name "*.spec.c" -type f -follow -print | grep $(PATTERN) | grep $(POST_PATTERN))
+TEST_FILES = $(shell echo $(wildcard $(AVAILABLE_FILES)) | grep $(PATTERN) | grep $(POST_PATTERN))
+
+#-edited
 CC_SOURCE = $(TEST_FILES) main.c utils.c $(CC_SOURCE_EXTRA)
 LIBFT_PATH = $(RENDU_PATH)/libft
 ADD_TESTS = $(shell echo "$(TEST_FILES)" | perl -pe "s/.*?\/([^\/ ]*)\.spec\.c/MT_ADD_SUITE\(mt, \1, suite_\1); /g")
